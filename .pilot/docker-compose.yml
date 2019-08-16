@@ -1,0 +1,45 @@
+version: "3.7"
+services:
+  rubymine-sample:
+    tty: true
+    build: 
+      context: $HOME/src/rubymine-sample/.pilot
+    depends_on:
+      - mysql
+      - memcached
+      - redis
+    environment:
+      USER: ${USER}
+      DOCKER_MYSQL_HOST: mysql
+      DOCKER_REDIS_URL: redis://redis:6379
+      DOCKER_REDIS_CACHE_HOST: redis
+      DOCKER_MEMCACHED_URL: memcached:11211
+      INTERCOM_API_KEY: ${INTERCOM_API_KEY}
+    ports:
+      - "3005:3005"
+    volumes:
+      - $HOME/src/rubymine-sample:/apps/rubymine-sample
+
+  mysql:
+    command: --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
+    environment:
+      MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
+    image: mysql:5.6
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysqldata1:/var/lib/mysql
+
+  memcached:
+    image: memcached
+    ports:
+      - "11211:11211"
+
+  redis:
+    image: redis:2.8.17
+    ports:
+      - "6379:6379"
+
+volumes:
+  mysqldata1:
+    driver: local
