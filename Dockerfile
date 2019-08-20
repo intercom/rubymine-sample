@@ -17,7 +17,6 @@ RUN chown -R pilotuser /apps
 
 USER pilotuser
 
-ENTRYPOINT ["dumb-init", ".pilot/entrypoint"]
+ENTRYPOINT ["dumb-init", "/opt/project/entrypoint"]
 
 CMD ["bundle", "exec", "rails", "server", "--port", "3005", "--binding", "0.0.0.0", "--pid", "/tmp/server.pid"]
-

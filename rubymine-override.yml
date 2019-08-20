@@ -1,0 +1,27 @@
+version: "3.7"
+services:
+  rubymine-sample:
+    command:
+    - "sh"
+    - "-c"
+    - "/usr/local/bin/ruby /opt/project/bin/rails server -b 0.0.0.0 -p 3005 -e development"
+    environment:
+      RM_INFO: "RM-192.5728.104"
+      SPRING_TMP_PATH: "/tmp/793529c4"
+      TEAMCITY_RAKE_RUNNER_MODE: "idea"
+      SPRING_SERVER_COMMAND: "spring server"
+      TEAMCITY_RAKE_RUNNER_USED_FRAMEWORKS: ":test_unit :shoulda "
+      RUBYMINE_TESTUNIT_REPORTER: "/opt/.rubymine_helpers/rb/testing/patch/testunit"
+      TEAMCIY_RAKE_TU_AUTORUNNER_PATH: "/usr/local/lib/ruby/gems/2.4.0/gems/test-unit-3.2.3/lib/test/unit/autorunner.rb"
+      ANSICON: ""
+      RUBYLIB: "/opt/.rubymine_helpers/rb/testing/patch/common:/opt/.rubymine_helpers/rb/testing/patch/testunit:/opt/.rubymine_helpers/rb/testing/patch/common:/opt/.rubymine_helpers/rb/testing/patch/bdd"
+      TEAMCITY_RAKE_TU_TESTRUNNERMADIATOR_PATH: "/usr/local/lib/ruby/gems/2.4.0/gems/test-unit-3.2.3/lib/test/unit/ui/testrunnermediator.rb"
+    ports:
+    - "3005:3005"
+    stdin_open: true
+    volumes:
+    - "/home/micheal.looney/src/rubymine-sample:/opt/project:rw"
+    - "rubymine_helpers_RM-192.5728.104:/opt/.rubymine_helpers/rb"
+    working_dir: "/home/micheal.looney/src/rubymine-sample"
+volumes:
+  rubymine_helpers_RM-192.5728.104: {}

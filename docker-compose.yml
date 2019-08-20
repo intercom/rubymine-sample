@@ -3,7 +3,7 @@ services:
   rubymine-sample:
     tty: true
     build: 
-      context: $HOME/src/rubymine-sample/.pilot
+      context: $HOME/src/rubymine-sample/
     depends_on:
       - mysql
       - memcached
