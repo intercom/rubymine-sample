@@ -1,0 +1,13 @@
+#!/usr/bin/env bash
+
+cd /opt/project/
+bundle install
+
+if mysql -h ${DOCKER_MYSQL_HOST} -u root -e "use rubymine-sample_development" 2>/dev/null; then
+  echo "Migrating databases"
+  bundle exec rake db:migrate db:test:prepare
+else
+  echo "Resetting databases"
+  bundle exec rake db:reset
+fi
+exec "$@"

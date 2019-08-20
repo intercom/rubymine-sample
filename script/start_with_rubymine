@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+
+docker-compose -f rubymine-override.yml -f docker-compose.yml up rubymine-sample
